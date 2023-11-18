@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1692266797103
+Build-Jdk: 1.8.0_202
+Built-By: 10118181
+Bundle-ManifestVersion: 2
+Bundle-Name: org.example.untitled
+Bundle-SymbolicName: org.example.untitled
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.example;uses:="org.apache.camel,org.apache.camel.imp
+ l,org.apache.camel.spi";version="1.0.0.SNAPSHOT"
+Import-Package: com.sap.it.api,com.sap.it.api.securestore,org.apache.cam
+ el,org.apache.camel.impl,org.apache.camel.spi,org.json,org.slf4j
+Tool: Bnd-2.1.0.20130426-122213

@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::deneme/vendor::true/version::1.0.0" ComponentName="deneme" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="deneme" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="Sample Component Receiver" VariantId="ctype::AdapterVariant/cname::deneme/vendor::true/tp::sap-sample/mp::sap-sample/direction::Receiver" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="sap-sample" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="484b8319-7d64-49f9-bef9-d47a419b6446">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="MessageDetails">
+                <AttributeReference>
+                    <ReferenceName>credential</ReferenceName>
+                    <description>Credential Name to connect to Dropbox</description>
+                </AttributeReference>
+            </AttributeGroup>
+        </Tab>
+        <Tab id="processing">
+            <GuiLabels guid="f691bd94-4c65-46a2-8530-053c525476a4">
+                <Label language="EN">Processing</Label>
+                <Label language="DE">Processing</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Processing</Name>
+                <GuiLabels guid="9fe1d0e4-84dd-4bdf-966d-83847f96c87b">
+                    <Label language="EN">Processing</Label>
+                    <Label language="DE">Processing</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>operation</ReferenceName>
+                    <description>Operation To Perform on users Dropbox</description>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>FilePath</ReferenceName>
+                    <description>File path in the users Dropbox, for example , '/Homework/Math/Vectors.txt'</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>UploadFile</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>DownloadFile</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>Path</ReferenceName>
+                    <description>Path in the user's Dropbox to delete.</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>DeleteFileOrFolder</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>GetMetadata</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>MaxResults</ReferenceName>
+                    <description>Maximum results to be returned from Dropbox.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>Search</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>Query</ReferenceName>
+                    <description>The string to search for.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>Search</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>OptionalPath</ReferenceName>
+                    <description>Scopes the search to a path in the user's Dropbox. Searches the entire Dropbox if not specified. This field is optional.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>Search</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>FromPath</ReferenceName>
+                    <description>Path in the user's Dropbox to be copied or moved.</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>MoveFile</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>CopyFile</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>ToPath</ReferenceName>
+                    <description>Path in the user's Dropbox that is the destination.</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>MoveFile</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>CopyFile</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>FolderPath</ReferenceName>
+                    <description>Folders path in the users Dropbox, for example , '/Homework/Math/'</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>CreateFolder</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>ListFolder</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>DownloadZip</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>includeMediaInfo</ReferenceName>
+                    <description>If true, FileMetadata.media_info is set for photo and video. The default for this field is False.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>GetMetadata</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>includeMountedFolders</ReferenceName>
+                    <description>If true, the results will include entries under mounted folders which includes app folder, shared folder and team folder. The default for this field is True.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>ListFolder</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>includeNonDownloadableFiles</ReferenceName>
+                    <description>If true, include files that are not downloadable, i.e. Google Docs. The default for this field is True.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>ListFolder</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>includeDeleted</ReferenceName>
+                    <description>If true, DeletedMetadata will be returned for deleted file or folder, otherwise LookupError.not_found will be returned. The default for this field is False.</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>GetMetadata</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>ListFolder</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>sharedMemb</ReferenceName>
+                    <description>If true, the results will include a flag for each file indicating whether or not that file has any explicit members. The default for this field is False.</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>GetMetadata</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>ListFolder</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>autoRename</ReferenceName>
+                    <description>If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict. The default for this field is False.</description>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>UploadFile</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>CopyFile</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>CreateFolder</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>recursive</ReferenceName>
+                    <description>If true, the list folder operation will be applied recursively to all subfolders and the response will contain contents of all subfolders. The default for this field is False.</description>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operation</AttributeName>
+                            <AttributeValue>ListFolder</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>dataFormat</ReferenceName>
+                    <description>response format</description>
+                </AttributeReference>
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <AttributeMetadata>
+        <Name>firstUriPart</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="876e40b9-c0a3-4d85-8b23-f1b509982b18">
+            <Label language="EN">First URI Part</Label>
+            <Label language="DE">First URI Part</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>greetingsMessage</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f1">
+            <Label language="EN">Greetings Message</Label>
+            <Label language="DE">Greetings Message</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>backoffMultiplier</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="83a4d6e8-1ec5-4693-a43a-30defc45dade">
+            <Label language="EN">Backoff Multiplier</Label>
+            <Label language="DE">Backoff Multiplier</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>sendEmptyMessageWhenIdle</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="eb3db3ca-fcfa-4a7a-95c3-a63b0b46b16e">
+            <Label language="EN">Send Empty Message When Idle</Label>
+            <Label language="DE">Send Empty Message When Idle</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>initialDelay</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:long</DataType>
+        <Default>1000</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="a00ea23c-4fdc-4976-b4ea-8e12688bc556">
+            <Label language="EN">Initial Delay</Label>
+            <Label language="DE">Initial Delay</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>backoffIdleThreshold</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="690620ff-b304-40f2-a68f-f8017092dccf">
+            <Label language="EN">Backoff Idle Threshold</Label>
+            <Label language="DE">Backoff Idle Threshold</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>useFixedDelay</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e9988885-6de5-43ee-88bd-032876a851a3">
+            <Label language="EN">Use Fixed Delay</Label>
+            <Label language="DE">Use Fixed Delay</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>delay</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:long</DataType>
+        <Default>500</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="a4f8a61b-7035-48e5-9ca8-6d2351620510">
+            <Label language="EN">Delay</Label>
+            <Label language="DE">Delay</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>startScheduler</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ccfe4f40-8bfc-4037-a83a-5ee7ba27729e">
+            <Label language="EN">Start Scheduler</Label>
+            <Label language="DE">Start Scheduler</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>credential</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ccfe4f40-8bfc-4037-a83a-5ee7ba27729e">
+            <Label language="EN">OAuth2 Credential Name</Label>
+            <Label language="DE">OAuth2 Credential Name</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>operation</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>UploadFile</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ccfe4f40-8bfc-4037-a83a-5ee7ba27729e">
+            <Label language="EN">Operation</Label>
+            <Label language="DE">Operation</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>UploadFile</Value>
+                <GuiLabels guid="86b7f3ba-0cac-4c94-bb20-2ce25a171804">
+                    <Label language="EN">Upload File</Label>
+                    <Label language="DE">Upload File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>GetMetadata</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Get Metadata</Label>
+                    <Label language="DE">Get Metadata</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ListFolder</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">List Folder</Label>
+                    <Label language="DE">List Folder</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>Search</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Search</Label>
+                    <Label language="DE">Search</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CreateFolder</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Create Folder</Label>
+                    <Label language="DE">Create Folder</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MoveFile</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Move File</Label>
+                    <Label language="DE">Move File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CopyFile</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Copy File</Label>
+                    <Label language="DE">Copy File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DownloadFile</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Download File</Label>
+                    <Label language="DE">Download File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DownloadZip</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Download Zip</Label>
+                    <Label language="DE">Download Zip</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DeleteFileOrFolder</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">Delete File or Folder</Label>
+                    <Label language="DE">Delete File or Folder</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>dataFormat</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>JSON</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ccfe4f40-8bfc-4037-a83a-5ee7ba27729e">
+            <Label language="EN">Data Format</Label>
+            <Label language="DE">Data Format</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>JSON</Value>
+                <GuiLabels guid="86b7f3ba-0cac-4c94-bb20-2ce25a171804">
+                    <Label language="EN">JSON</Label>
+                    <Label language="DE">JSON</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>XML</Value>
+                <GuiLabels guid="e3b2819f-f929-40f0-8748-18da25408301">
+                    <Label language="EN">XML</Label>
+                    <Label language="DE">XML</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>Path</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Path</Label>
+            <Label language="DE">Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>OptionalPath</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Path</Label>
+            <Label language="DE">Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>Query</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Query</Label>
+            <Label language="DE">Query</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>MaxResults</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Max Results</Label>
+            <Label language="DE">Max Results</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>FilePath</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">File Path</Label>
+            <Label language="DE">File Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>FolderPath</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Folder Path</Label>
+            <Label language="DE">Folder Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>FromPath</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">From Path</Label>
+            <Label language="DE">From Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>ToPath</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">To Path</Label>
+            <Label language="DE">To Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>autoRename</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">autoRename</Label>
+            <Label language="DE">autoRename</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>sharedMemb</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Include Has Explicit Shared Members</Label>
+            <Label language="DE">Include Has Explicit Shared Members</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>recursive</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">recursive</Label>
+            <Label language="DE">recursive</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>includeMediaInfo</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Include Media Info</Label>
+            <Label language="DE">Include Media Info</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>includeDeleted</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Include Deleted</Label>
+            <Label language="DE">Include Deleted</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>includeNonDownloadableFiles</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Include Non Downloadable Files</Label>
+            <Label language="DE">Include Non Downloadable Files</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>includeMountedFolders</Name>
+        <Usage/>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="11590bbb-5c34-4f40-9bde-38790e350638">
+            <Label language="EN">Include Mounted Folders</Label>
+            <Label language="DE">Include Mounted Folders</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>runLoggingLevel</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>TRACE</Default>
+        <Length/>
+        <isparameterized>false</isparameterized>
+        <GuiLabels guid="421138a8-41c6-414b-b3e9-c0c06fbea859">
+            <Label language="EN">Run Logging Level</Label>
+            <Label language="DE">Run Logging Level</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>TRACE</Value>
+                <GuiLabels guid="352deeac-432f-45d1-927e-781c5c0289f8">
+                    <Label language="EN">TRACE</Label>
+                    <Label language="DE">TRACE</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ERROR</Value>
+                <GuiLabels guid="39ad97f5-1d83-4ff5-a8cf-bdf80ef09bbc">
+                    <Label language="EN">ERROR</Label>
+                    <Label language="DE">ERROR</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>INFO</Value>
+                <GuiLabels guid="e6c0a878-aeaf-4efa-a759-5e58e2265508">
+                    <Label language="EN">INFO</Label>
+                    <Label language="DE">INFO</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DEBUG</Value>
+                <GuiLabels guid="1c7c4cad-cd9c-4188-9838-5bf8bfa9dbbe">
+                    <Label language="EN">DEBUG</Label>
+                    <Label language="DE">DEBUG</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>OFF</Value>
+                <GuiLabels guid="d93f47c7-89a3-43d5-8fbd-234886117f02">
+                    <Label language="EN">OFF</Label>
+                    <Label language="DE">OFF</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>WARN</Value>
+                <GuiLabels guid="aced2629-1430-404c-aeda-e53cb10c7af4">
+                    <Label language="EN">WARN</Label>
+                    <Label language="DE">WARN</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>backoffErrorThreshold</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="fafb52c3-28c6-41c7-8e08-e21d885ba870">
+            <Label language="EN">Backoff Error Threshold</Label>
+            <Label language="DE">Backoff Error Threshold</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>greedy</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ebe1a5b6-e0dc-4092-acba-ed54e6dc909d">
+            <Label language="EN">Greedy</Label>
+            <Label language="DE">Greedy</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>timeUnit</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>MILLISECONDS</Default>
+        <Length/>
+        <isparameterized>false</isparameterized>
+        <GuiLabels guid="56d0b719-f641-41f8-9ed8-f44fd30e1edc">
+            <Label language="EN">Time Unit</Label>
+            <Label language="DE">Time Unit</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>MILLISECONDS</Value>
+                <GuiLabels guid="b8796b47-0a17-4c9f-8142-e07b5355c18d">
+                    <Label language="EN">MILLISECONDS</Label>
+                    <Label language="DE">MILLISECONDS</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MICROSECONDS</Value>
+                <GuiLabels guid="c527d83b-acb1-4f99-ae3f-04d8619b31c6">
+                    <Label language="EN">MICROSECONDS</Label>
+                    <Label language="DE">MICROSECONDS</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>SECONDS</Value>
+                <GuiLabels guid="849be036-c140-4333-8260-1daf04b7a838">
+                    <Label language="EN">SECONDS</Label>
+                    <Label language="DE">SECONDS</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DAYS</Value>
+                <GuiLabels guid="4ad6e227-ffa7-494e-9edd-9940dfa2f54b">
+                    <Label language="EN">DAYS</Label>
+                    <Label language="DE">DAYS</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>NANOSECONDS</Value>
+                <GuiLabels guid="36781d55-2554-4818-b87c-c9fe0cb540f1">
+                    <Label language="EN">NANOSECONDS</Label>
+                    <Label language="DE">NANOSECONDS</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>HOURS</Value>
+                <GuiLabels guid="6cedc173-9ef7-4018-86be-e900fa168d87">
+                    <Label language="EN">HOURS</Label>
+                    <Label language="DE">HOURS</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MINUTES</Value>
+                <GuiLabels guid="47829f7e-3ae7-4212-b085-97b2bf9dee51">
+                    <Label language="EN">MINUTES</Label>
+                    <Label language="DE">MINUTES</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+</ComponentMetadata>
